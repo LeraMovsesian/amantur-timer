@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import './App.css'
 import rabbitImg from './assets/rabbit.png'
-import timerSound from './assets/timer.mp3'
-import laugh1 from './assets/laugh1.mp3'
-import laugh2 from './assets/laugh2.mp3'
-import laugh3 from './assets/laugh3.mp3'
+import sweet from './assets/sweet.mp3'
 
 function App() {
-  const targetDate = new Date('2026-06-05T14:00:00+06:00')
+  const targetDate = new Date('2026-06-04T14:00:00+06:00')
 
   const calculateTimeLeft = () => {
     const difference = +targetDate - +new Date()
@@ -54,46 +51,12 @@ function App() {
   useEffect(() => {
     if (!started) return
 
-    const laughSounds = [laugh1, laugh2, laugh3]
-    let laughIndex = 0
-    let laughTimeout: ReturnType<typeof setTimeout>
-    let currentLaugh: HTMLAudioElement | null = null
-
-    const audio = new Audio(timerSound)
+    const audio = new Audio(sweet)
     audio.loop = true
 
-    const playNextLaugh = () => {
-      if (currentLaugh) {
-        currentLaugh.pause()
-        currentLaugh.onended = null
-      }
-
-      const nextLaugh = new Audio(laughSounds[laughIndex])
-      currentLaugh = nextLaugh
-
-      nextLaugh.play().catch(error => {
-        console.log("Laugh playback failed:", error)
-      })
-
-      nextLaugh.onended = () => {
-        laughIndex = (laughIndex + 1) % laughSounds.length
-        laughTimeout = setTimeout(playNextLaugh, 3000)
-      }
-    }
-
-    audio.play().then(() => {
-      playNextLaugh()
-    }).catch(error => {
-      console.log("Audio play blocked by browser:", error)
-    })
-
+    audio.play();
     return () => {
       audio.pause()
-      if (currentLaugh) {
-        currentLaugh.pause()
-        currentLaugh.onended = null
-      }
-      clearTimeout(laughTimeout)
     }
   }, [started])
 
@@ -140,7 +103,7 @@ function App() {
               />
           ))}
         </div>
-        <h1 className="title">ДО СОБЕСЕДОВАНИЯ</h1>
+        <h1 className="title">НИКАКОВА СОБЕСА НЕ БУДЕТ</h1>
         <div className="timer">
           <div className="time-block">
             <span className="time-value">{timeLeft.days}</span>
@@ -159,6 +122,10 @@ function App() {
             <span className="time-label">секунд</span>
           </div>
         </div>
+        <h1 className="title">ну и похуй</h1>
+
+        <h3 style={{ color: 'black'}}>кто грустит тот трансвестит :)</h3>
+
         <div className="bottom-text">кто прочитал тот лох</div>
       </main>
   )

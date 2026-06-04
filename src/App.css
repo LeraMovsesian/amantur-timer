@@ -50,8 +50,9 @@ body {
 .title {
   font-size: 3rem;
   margin-bottom: 2rem;
-  color: var(--text-h);
+  color: #4e4a4a;
   text-align: center;
+  line-height: 1.8rem;
 }
 
 .timer {
